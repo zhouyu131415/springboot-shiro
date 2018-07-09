@@ -42,6 +42,7 @@ public class LoginController {
 		Map<String, String> map = new HashMap<String, String>();
         map.put("code", "1000000");
         map.put("msg", "未登录");
+        
 		return map.toString();
 	}
 	
