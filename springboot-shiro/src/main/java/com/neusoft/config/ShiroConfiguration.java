@@ -12,6 +12,7 @@ import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.crazycake.shiro.RedisCacheManager;
 import org.crazycake.shiro.RedisManager;
 import org.crazycake.shiro.RedisSessionDAO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerExceptionResolver;
@@ -19,13 +20,13 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 @Configuration
 public class ShiroConfiguration {
 	
-//    @Value("${spring.redis.shiro.host}")
+    @Value("${spring.redis.shiro.host}")
     private String host;
-//    @Value("${spring.redis.shiro.port}")
+    @Value("${spring.redis.shiro.port}")
     private int port;
-//    @Value("${spring.redis.shiro.timeout}")
+    @Value("${spring.redis.shiro.timeout}")
     private int timeout;
-//    @Value("${spring.redis.shiro.password}")
+    @Value("${spring.redis.shiro.password}")
     private String password;
 	
 	
@@ -44,7 +45,7 @@ public class ShiroConfiguration {
 		securityManager.setRealm(myShiroRealm());
 		
         // 自定义session管理 使用redis
-//        securityManager.setSessionManager(sessionManager());
+        securityManager.setSessionManager(sessionManager());
         // 自定义缓存实现 使用redis
 //        securityManager.setCacheManager(cacheManager());
         
@@ -66,7 +67,7 @@ public class ShiroConfiguration {
 		//对所有用户认证
 		map.put("/**", "authc");
 		//登录
-		shiroFilterFactoryBean.setLoginUrl("/unauth");
+		shiroFilterFactoryBean.setLoginUrl("/login");
 		//首页
 		shiroFilterFactoryBean.setSuccessUrl("/index");
 		//错误页面，认证不通过跳转
